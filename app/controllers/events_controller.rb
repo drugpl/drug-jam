@@ -1,37 +1,37 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   respond_to :html
 
   def index
-    respond_with(@events = Event.all)
+    respond_with(@events)
   end
 
   def show
-    respond_with(@event = Event.find(params[:id]))
+    respond_with(@event)
   end
 
   def new
-    respond_with(@event = Event.new)
+    respond_with(@event)
   end
 
   def edit
-    respond_with(@event = Event.find(params[:id]))
+    respond_with(@event)
   end
 
   def create
-    @event = Event.create(params[:event].merge(:organizer_id => current_user.id))
+    @event.organizer = current_user
+    @event.save
     respond_with(@event, :location => events_url)
   end
 
   def update
-    @event = Event.find(params[:id])
     @event.update_attributes(params[:event].except(:organizer_id))
     respond_with(@event, :location => events_url)
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
     respond_with(@event, :location => events_url)
   end

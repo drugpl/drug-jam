@@ -9,6 +9,7 @@ gem 'simple_form'
 gem 'RedCloth'
 gem 'automatic_foreign_key'
 gem 'jquery-rails', '>= 0.2.6'
+gem 'cancan'
 
 group :test do
   gem 'rspec-rails'
