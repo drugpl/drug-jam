@@ -1,5 +1,7 @@
 Jam::Application.routes.draw do
-  resources :events
+  resources :events do
+    resources :attendances
+  end
 
   devise_for :users
 

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110106162532) do
+ActiveRecord::Schema.define(:version => 20110106235231) do
+
+  create_table "attendances", :force => true do |t|
+    t.integer  "attendant_id", :null => false
+    t.integer  "event_id",     :null => false
+    t.string   "comment"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.datetime "starting_at"
@@ -39,6 +47,9 @@ ActiveRecord::Schema.define(:version => 20110106162532) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  add_foreign_key "attendances", ["attendant_id"], "users", ["id"], :name => "attendances_attendant_id_fkey"
+  add_foreign_key "attendances", ["event_id"], "events", ["id"], :name => "attendances_event_id_fkey"
 
   add_foreign_key "events", ["organizer_id"], "users", ["id"], :name => "events_organizer_id_fkey"
 

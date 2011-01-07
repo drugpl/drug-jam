@@ -7,6 +7,8 @@
     %th Title
     %th Place
     %th Organizer
+    %th Attendants
+    %th
     %th
     %th
     %th
@@ -18,8 +20,15 @@
       %td= event.title
       %td= event.place
       %td= event.organizer.name
+      %td
+        - event.attendants.each do |attendant|
+          = attendant.name
+      %td
+        - if event.attended_by? current_user
+          = link_to 'Leave', event_attendance_path(event, event.attendance_for(current_user)), :confirm => 'Are you sure?', :method => :delete unless event.organized_by? current_user
+        - else
+          = link_to 'Attend', new_event_attendance_path(event)
       %td= link_to 'Show', event
-
       - if can? :manage, event
         %td= link_to 'Edit', edit_event_path(event)
         %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
