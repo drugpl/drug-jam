@@ -4,4 +4,6 @@ class Attendance < ActiveRecord::Base
 
   validates_presence_of :attendant, :event
   validates_uniqueness_of :attendant_id, :scope => :event_id
+
+  attr_protected :attendant, :event
 end

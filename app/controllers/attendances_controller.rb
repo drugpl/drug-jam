@@ -9,7 +9,8 @@ class AttendancesController < ApplicationController
   end
   
   def create
-    @attendance.update_attributes(:event_id => params[:event_id], :attendant_id => current_user.id)
+    @attendance.event_id, @attendance.attendant = params[:event_id], current_user
+    @attendance.save
     respond_with(@attendance,  :location => events_url)
   end
 

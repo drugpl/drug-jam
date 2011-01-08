@@ -17,7 +17,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    respond_with(@event)
   end
 
   def create
@@ -27,7 +26,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event.update_attributes(params[:event].except(:organizer_id))
+    @event.update_attributes(params[:event])
     respond_with(@event, :location => events_url)
   end
 

@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :title, :description, :organizer
 
+  attr_protected :organizer
+
   after_create :attend_by_organizer
 
   def organized_by?(user)
