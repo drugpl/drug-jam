@@ -1,0 +1,17 @@
+= simple_form_for([:event, @submission]) do |f|
+  - if @submission.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@submission.errors.count, "error")
+        prohibited this submission from being saved:
+
+      %ul
+      - @submission.errors.full_messages.each do |msg|
+        %li= msg
+
+  .inputs
+    = f.input :title
+    = f.input :description
+
+  .actions
+    = f.button :submit

@@ -1,0 +1,26 @@
+%h1 Listing submissions
+
+%table
+  %tr
+    %th Author
+    %th Event
+    %th Title
+    %th Description
+    %th
+    %th
+    %th
+
+  - @submissions.each do |submission|
+    %tr
+      %td= submission.author
+      %td= submission.event
+      %td= submission.title
+      %td= submission.description
+      %td= link_to 'Show', [submission.event, submission]
+      - if submission.authored_by? current_user
+        %td= link_to 'Edit', edit_event_submission_path(submission.event, submission)
+        %td= link_to 'Destroy', [submission.event, submission], :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Submission', new_event_submission_path(@event)

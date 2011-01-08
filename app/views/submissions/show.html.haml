@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Author:
+  = @submission.author
+%p
+  %b Event:
+  = @submission.event
+%p
+  %b Title:
+  = @submission.title
+%p
+  %b Description:
+  = @submission.description
+
+= link_to 'Edit', edit_event_submission_path(@submission.event, @submission)
+\|
+= link_to 'Back', event_submissions_path(@submission.event)

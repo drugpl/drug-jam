@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :organizer, :class_name => "User"
   has_many :attendances
   has_many :attendants, :through => :attendances
+  has_many :submissions
 
   validates_presence_of :title, :description, :organizer
 

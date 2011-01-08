@@ -1,0 +1,7 @@
+%h1 Editing submission
+
+= render 'form'
+
+= link_to 'Show', [@submission.event, @submission]
+\|
+= link_to 'Back', event_submissions_path(@submission.event)
