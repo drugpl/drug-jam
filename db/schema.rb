@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107231256) do
+ActiveRecord::Schema.define(:version => 20110108012624) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "attendant_id", :null => false
@@ -62,6 +62,15 @@ ActiveRecord::Schema.define(:version => 20110107231256) do
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id",       :null => false
+    t.integer  "submission_id", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id", :unique => true
+
   add_foreign_key "attendances", ["attendant_id"], "users", ["id"], :name => "attendances_attendant_id_fkey"
   add_foreign_key "attendances", ["event_id"], "events", ["id"], :name => "attendances_event_id_fkey"
 
@@ -69,5 +78,8 @@ ActiveRecord::Schema.define(:version => 20110107231256) do
 
   add_foreign_key "submissions", ["author_id"], "users", ["id"], :name => "submissions_author_id_fkey"
   add_foreign_key "submissions", ["event_id"], "events", ["id"], :name => "submissions_event_id_fkey"
+
+  add_foreign_key "votes", ["user_id"], "users", ["id"], :name => "votes_user_id_fkey"
+  add_foreign_key "votes", ["submission_id"], "submissions", ["id"], :name => "votes_submission_id_fkey"
 
 end
