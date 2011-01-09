@@ -12,6 +12,7 @@
     %th
     %th
     %th
+    %th
 
   - @events.each do |event|
     %tr
@@ -32,6 +33,7 @@
       - if can? :manage, event
         %td= link_to 'Edit', edit_event_path(event)
         %td= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Submissions', event_submissions_path(event)
 
 %br
 
