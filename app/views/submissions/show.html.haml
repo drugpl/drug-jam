@@ -16,3 +16,11 @@
 = link_to 'Edit', edit_event_submission_path(@submission.event, @submission)
 \|
 = link_to 'Back', event_submissions_path(@submission.event)
+\|
+= link_to 'Comment', new_event_submission_comment_path(@submission.event, @submission)
+
+%ul.comments
+  - @submission.comments.each do |comment|
+    %li
+      = comment.author.name
+      = comment.body

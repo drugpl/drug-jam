@@ -1,8 +1,10 @@
 Jam::Application.routes.draw do
   resources :events do
+    resources :comments
     resources :attendances
     resources :submissions do
       resources :votes
+      resources :comments
     end
   end
 
