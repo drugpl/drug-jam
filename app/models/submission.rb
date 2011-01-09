@@ -3,6 +3,7 @@ class Submission < ActiveRecord::Base
   belongs_to :event
   has_many :votes
   has_many :users_voted, :through => :votes, :source => :user
+  has_many :comments, :as => :commentable
 
   validates_presence_of :event, :author, :title
 

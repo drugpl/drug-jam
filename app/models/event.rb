@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   has_many :attendances
   has_many :attendants, :through => :attendances
   has_many :submissions
+  has_many :comments, :as => :commentable
 
   validates_presence_of :title, :description, :organizer
 

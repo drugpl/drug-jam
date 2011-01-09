@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110108012624) do
+ActiveRecord::Schema.define(:version => 20110109125643) do
 
   create_table "attendances", :force => true do |t|
     t.integer  "attendant_id", :null => false
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(:version => 20110108012624) do
   end
 
   add_index "attendances", ["attendant_id", "event_id"], :name => "attendances_attendant_id_event_id_unique_index", :unique => true
+
+  create_table "comments", :force => true do |t|
+    t.text     "body",             :null => false
+    t.integer  "author_id",        :null => false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.datetime "starting_at"
@@ -73,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20110108012624) do
 
   add_foreign_key "attendances", ["attendant_id"], "users", ["id"], :name => "attendances_attendant_id_fkey"
   add_foreign_key "attendances", ["event_id"], "events", ["id"], :name => "attendances_event_id_fkey"
+
+  add_foreign_key "comments", ["author_id"], "users", ["id"], :name => "comments_author_id_fkey"
 
   add_foreign_key "events", ["organizer_id"], "users", ["id"], :name => "events_organizer_id_fkey"
 
