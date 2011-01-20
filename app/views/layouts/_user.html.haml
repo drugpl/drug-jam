@@ -1,0 +1,12 @@
+- if current_user
+  %strong= current_user.name
+  = link_to "(sign out)", destroy_user_session_path
+  %ul
+    %li= "submissions (#{current_user.submissions.size})"
+    %li= "votes (#{current_user.votes.size})"
+  = yield :user_actions
+- else
+  = link_to "sign in", new_user_session_path
+  or
+  = link_to "register", new_user_registration_path
+  

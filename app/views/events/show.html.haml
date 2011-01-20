@@ -1,29 +1,62 @@
-%p#notice= notice
+%h2= @event.title
 
-%p
-  %b Starting at:
-  = @event.starting_at
-%p
-  %b Description:
-  = @event.description
-%p
-  %b Title:
-  = @event.title
-%p
-  %b Place:
-  = @event.place
-%p
-  %b Organizer:
-  = @event.organizer
+.event
+  .description
+    %p
+      = @event.description
+  .info  
+    %dl
+      %dt Starting at:
+      %dd= @event.starting_at ? I18n.l(@event.starting_at, :format => :event) : "yet unknown"
+      %dt Place:
+      %dd= @event.place.present?? @event.place : "yet unknown"
+      %dt Organizer:
+      %dd
+        = @event.organizer.name
+        = "(#{mail_to @event.organizer.email})".html_safe
 
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
-\|
-= link_to 'Comment', new_event_comment_path(@event)
-
-%ul.comments
-  - @event.comments.each do |comment|
+%h3 Attendants
+%ul#attendants
+  - @event.attendances.each do |attendance|
     %li
-      = comment.author.name
-      = comment.body
+      = attendance.attendant.name
+      = "(#{attendance.comment})" unless attendance.comment.blank?
+
+%h3 Submissions
+%ul#submissions
+  - @event.submissions.each do |submission|
+    %li.submission
+      %h4= link_to submission.title, [submission.event, submission]
+      %div.footer
+        submitted by
+        %strong= submission.author.name
+        %span.right
+          = "#{submission.votes.size} likes"
+      .actions
+        - unless submission.voted_by? current_user
+          = link_to 'like', event_submission_votes_path(submission.event, submission), :class => 'vote-up', :method => :post, :"data-user_id" => current_user.id, :"data-submission_id" => submission.id
+        - else
+          = link_to 'unlike', [submission.event, submission, submission.vote_for(current_user)], :method => :delete
+        .author-actions
+          - if submission.authored_by? current_user
+            = link_to 'edit', edit_event_submission_path(submission.event, submission)
+            \/
+            = link_to 'destroy', [submission.event, submission], :confirm => 'Are you sure?', :method => :delete
+
+%h3 Comments
+%dl#comments
+  - @event.comments.each do |comment|
+    = render :partial => 'comments/comment', :locals => {:comment => comment}
+
+.actions
+  = link_to 'comment', new_event_comment_path(@event)
+
+= content_for :user_actions do
+  = link_to 'new submission', new_event_submission_path(@event)
+  - unless @event.attendants.include? current_user
+    \/
+    = link_to 'attend', new_event_attendance_path(@event)
+  - else
+    - unless @event.organized_by? current_user
+      \/
+      = link_to 'quit', event_attendance_path(@event, @event.attendance_for(current_user)), :method => :delete

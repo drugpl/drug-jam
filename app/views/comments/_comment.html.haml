@@ -1,0 +1,6 @@
+%dt
+  %strong= comment.author.name
+%dd
+  = comment.body
+  %br
+  = I18n.l(comment.created_at, :format => :short)

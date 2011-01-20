@@ -1,13 +1,13 @@
 = simple_form_for(@event) do |f|
   - if @event.errors.any?
     #error_explanation
-      %h2
+      %h3
         = pluralize(@event.errors.count, "error")
         prohibited this event from being saved:
 
       %ul
-      - @event.errors.full_messages.each do |msg|
-        %li= msg
+        - @event.errors.full_messages.each do |msg|
+          %li= msg
 
   .inputs
     = f.input :starting_at, :include_blank => true

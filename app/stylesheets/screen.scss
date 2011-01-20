@@ -1,0 +1,190 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Combine the partials into a single screen stylesheet.
+@import "partials/page";
+@import "partials/form";
+@import "compass/css3/font-face";
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+@import "blueprint/colors";
+@import "blueprint/typography";
+
+body {
+  @include blueprint_typography(true);
+  
+  #container {
+    @include container;
+    padding: 2em;
+    @include box-shadow($quiet-color, 0, 0, 25px, 10px); }
+  
+  #container > header {
+    padding-bottom: 2em;
+    position: relative; }
+
+  header, footer {
+    display: block; }
+//    @include column($blueprint-grid-columns); }
+
+//  aside {
+//    margin-top: -0.5em;
+//    display: block;
+//    $sidebar-columns: floor($blueprint-grid-columns / 3 - 3);
+//    @include column($sidebar-columns, true); }
+
+  #content {
+//    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+//    @include column($content-columns); 
+//    padding-right: 2em; 
+    padding-bottom: 2em; } 
+
+  ul {
+    margin-bottom: .5em;
+    margin-right: 0;
+    padding: 0;
+    list-style-type: none; } }
+
+li.event {
+  padding-bottom: 1em;
+
+  h3 { 
+    margin-bottom: .2em; } }
+
+li.comment {
+  padding-bottom: 1em; }
+
+li.submission {
+  padding-bottom: 1em;
+
+  h4 {
+    margin-bottom: .2em; }
+
+  div.footer {
+    padding-bottom: .5em } }
+
+div.event, div.submission {
+  display: table;
+  width: 100%;
+
+  div.description {
+    text-align: justify;
+    padding-right: 2.5em;
+    width: 380px; }
+  div {
+    display: table-cell; } }
+
+div.inputs {
+  input[type=text], textarea {
+    font-size: 100%;
+    font-family: inherit;
+    padding: .5em;
+    width: 30em;
+    border: 1px solid $quiet-color;
+  }
+  
+  .input {
+    padding-bottom: 1em; }
+
+  label {
+    font-weight: bold;
+    display: block; } }
+
+div.user {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: $quiet-color;
+  padding: 1em;
+  @include border-radius(4px, 4px); }
+
+div#error_explanation {
+  background-color: $quiet-color;
+  padding: .5em 1em;
+  margin-bottom: .5em;
+  @include border-radius(4px, 4px); }
+
+span.error {
+  padding-left: 1em;
+  color: red;
+  vertical-align: top; }
+
+div.actions {
+  position: relative;
+  background-color: $quiet-color;
+  padding: .5em 1em;
+  margin-bottom: .5em;
+  @include border-radius(4px, 4px); }
+
+div.organizer-actions, div.author-actions {
+  position: absolute;
+  right: 1em;
+  top: .5em;
+}
+
+span.right {
+  float: right; }
+
+header {
+  margin-top: .6em;
+  
+  h1.title {
+    display: inline;
+    font-size: 350%;
+    letter-spacing: -4px;
+    padding: 0;
+    margin: 0;
+  }
+
+  h2.subtitle {
+    display: inline;
+    font-size: 175%;
+    color: #666;
+    letter-spacing: -1.5px;
+    padding: 0;
+    margin: 0;
+    padding-left: .1em;
+  } }
+
+section {
+  display: block }
+
+section#about {
+  clear: both;
+}
+
+section#body {
+  position: relative; }
+
+article {
+  display: block;
+
+  header {
+    margin-bottom: 1em; } }
+
+footer {
+  border-top: 1px solid $quiet-color;
+
+  p {
+    text-align: center;
+    font-size: 80%;
+    padding-top: 2em;
+  } }
+
+a:link, a:visited {
+  color: $link-color;
+  text-decoration: none; }
+
+a:hover, a:active, .active a:link, .active a:visited {
+  color: $link-color !important; 
+  padding-bottom: .1em;
+  outline: none;
+  border-bottom: 1px solid $link-color; }
+
+a.logo {
+  border: 0; }

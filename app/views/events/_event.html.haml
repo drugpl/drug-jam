@@ -1,0 +1,25 @@
+%li.event
+  %h3= link_to event.title, event
+  %p
+    = I18n.l(event.starting_at, :format => :event) if event.starting_at
+    - unless event.place.blank? 
+      at 
+      %strong= event.place
+    organized by
+    %strong= event.organizer.name
+  %p
+    = event.description
+  .actions
+    = link_to 'comments', "#{event_path(event)}#comments"
+    = "(#{event.comments.size})"
+    \/
+    = link_to 'submissions', "#{event_path(event)}#submissions"
+    = "(#{event.submissions.size})"
+    \/
+    = link_to 'attendants', "#{event_path(event)}#attendants"
+    = "(#{event.attendants.size})"
+    - if can? :manage, event
+      .organizer-actions
+        = link_to 'edit', edit_event_path(event)
+        \/
+        = link_to 'destroy', event, :confirm => 'Are you sure?', :method => :delete

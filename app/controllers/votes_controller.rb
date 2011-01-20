@@ -10,12 +10,12 @@ class VotesController < ApplicationController
     @vote.submission_id, @vote.user = params[:submission_id], current_user
     authorize! :create, @vote
     @vote.save
-    respond_with(@vote, :location => event_submissions_url(@event))
+    respond_with(@vote, :location => event_url(@event))
   end
 
   def destroy
     @event = Event.find(params[:event_id])
     @vote.destroy
-    respond_with(@vote, :location => event_submissions_url(@event))
+    respond_with(@vote, :location => event_url(@event))
   end
 end

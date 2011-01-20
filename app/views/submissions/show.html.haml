@@ -1,26 +1,27 @@
-%p#notice= notice
+%h2= @submission.title
 
-%p
-  %b Author:
-  = @submission.author
-%p
-  %b Event:
-  = @submission.event
-%p
-  %b Title:
-  = @submission.title
-%p
-  %b Description:
-  = @submission.description
-
-= link_to 'Edit', edit_event_submission_path(@submission.event, @submission)
-\|
-= link_to 'Back', event_submissions_path(@submission.event)
-\|
-= link_to 'Comment', new_event_submission_comment_path(@submission.event, @submission)
-
-%ul.comments
+.submission
+  .description
+    %p
+      = @submission.description
+  .info  
+    %dl
+      %dt Author:
+      %dd= @submission.author.name 
+      %dt Liked by:
+      %dd 
+        %ul
+          - @submission.users_voted.each do |user|
+            %li= user.name
+            
+%h3 Comments
+%dl#comments
   - @submission.comments.each do |comment|
-    %li
-      = comment.author.name
-      = comment.body
+    = render :partial => 'comments/comment', :locals => {:comment => comment}
+
+.actions
+  = link_to 'comment', new_event_submission_comment_path(@submission.event, @submission)
+
+= content_for :user_actions do
+  - if can? :manage, @submission
+    = link_to 'edit', edit_event_submission_path(@submission.event, @submission)

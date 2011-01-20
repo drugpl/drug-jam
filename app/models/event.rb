@@ -7,9 +7,13 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :title, :description, :organizer
 
+  scope :past, lambda { where('starting_at < ?', Time.now) }
+  scope :future, lambda { where('starting_at >= ? OR starting_at IS NULL', Time.now) }
+
   attr_protected :organizer
 
   after_create :attend_by_organizer
+  before_destroy :remove_organizer
 
   def organized_by?(user)
     self.organizer == user
@@ -26,5 +30,9 @@ class Event < ActiveRecord::Base
   protected
   def attend_by_organizer
     self.attendants << self.organizer
+  end
+
+  def remove_organizer
+    self.attendants.delete(self.organizer)
   end
 end
