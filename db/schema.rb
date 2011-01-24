@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20110124233722) do
   create_table "submissions", :force => true do |t|
     t.integer  "author_id",   :null => false
     t.integer  "event_id",    :null => false
-    t.string   "title"
+    t.string   "title",       :null => false
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20110124233722) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "votes", ["user_id"], :name => "index_votes_on_user_id", :unique => true
+  add_index "votes", ["user_id", "submission_id"], :name => "votes_user_id_submission_id_unique_index", :unique => true
 
   add_foreign_key "attendances", ["attendant_id"], "users", ["id"], :name => "attendances_attendant_id_fkey"
   add_foreign_key "attendances", ["event_id"], "events", ["id"], :name => "attendances_event_id_fkey"
