@@ -1,4 +1,8 @@
+require 'textilized_attributes'
+
 class Submission < ActiveRecord::Base
+  include TextilizedAttributes
+
   belongs_to :author, :class_name => "User"
   belongs_to :event
   has_many :votes
@@ -9,6 +13,8 @@ class Submission < ActiveRecord::Base
 
   attr_protected :author, :event
   
+  textilized_attrs :description
+
   def authored_by?(user)
     self.author == user
   end

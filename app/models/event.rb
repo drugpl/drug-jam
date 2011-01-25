@@ -1,4 +1,8 @@
+require 'textilized_attributes'
+
 class Event < ActiveRecord::Base
+  include TextilizedAttributes
+
   belongs_to :organizer, :class_name => "User"
   has_many :attendances
   has_many :attendants, :through => :attendances
@@ -14,6 +18,8 @@ class Event < ActiveRecord::Base
 
   after_create :attend_by_organizer
   before_destroy :remove_organizer
+
+  textilized_attrs :description
 
   def organized_by?(user)
     self.organizer == user

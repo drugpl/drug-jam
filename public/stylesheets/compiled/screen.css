@@ -629,6 +629,12 @@ div.event div.description, div.submission div.description {
   padding-right: 2.5em;
   width: 380px;
 }
+div.event div.description ul, div.submission div.description ul {
+  margin-bottom: .5em;
+  margin-right: 0;
+  padding-left: 1em;
+  list-style-type: disc;
+}
 div.event div, div.submission div {
   display: table-cell;
 }

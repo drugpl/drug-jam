@@ -8,7 +8,7 @@
     organized by
     %strong= event.organizer.name
   %p
-    = event.description
+    = event.textilized_description
   .actions
     = link_to 'comments', "#{event_path(event)}#comments"
     = "(#{event.comments.size})"

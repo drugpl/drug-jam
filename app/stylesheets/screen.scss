@@ -75,7 +75,14 @@ div.event, div.submission {
   div.description {
     text-align: justify;
     padding-right: 2.5em;
-    width: 380px; }
+    width: 380px; 
+
+    ul {
+      margin-bottom: .5em;
+      margin-right: 0;
+      padding-left: 1em;
+      list-style-type: disc; } } 
+
   div {
     display: table-cell; } }
 
