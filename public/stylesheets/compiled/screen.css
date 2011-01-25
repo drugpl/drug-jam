@@ -625,9 +625,9 @@ div.event, div.submission {
   width: 100%;
 }
 div.event div.description, div.submission div.description {
+  width: 65%;
   text-align: justify;
   padding-right: 2.5em;
-  width: 380px;
 }
 div.event div.description ul, div.submission div.description ul {
   margin-bottom: .5em;
