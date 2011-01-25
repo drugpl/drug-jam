@@ -53,6 +53,12 @@ body {
 li.event {
   padding-bottom: 1em;
 
+  ul {
+    margin-bottom: .5em;
+    margin-right: 0;
+    padding-left: 1em;
+    list-style-type: disc; }
+
   h3 { 
     margin-bottom: .2em; } }
 
