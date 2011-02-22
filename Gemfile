@@ -21,4 +21,6 @@ end
 
 group :development do
   gem 'rspec-rails'
+  gem 'capistrano'
+  gem 'rvm'
 end
