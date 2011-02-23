@@ -5,3 +5,7 @@ en:
   time:
     formats:
       event: "%A, %d %B %Y, %H:%M"
+
+  site:
+    title: "Jam! DRUG hacking events tracker"
+    description: "Create events, add submissions, vote and attend to ruby hacking sessions"

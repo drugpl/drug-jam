@@ -2,6 +2,8 @@ class EventsController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
+  before_filter :set_meta_tags
+
   respond_to :html
 
   def index
@@ -34,4 +36,13 @@ class EventsController < ApplicationController
     @event.destroy
     respond_with(@event, :location => events_url)
   end
+
+  protected
+  def set_meta_tags
+   if @event
+     @meta_title = @event.title
+     @meta_description = @event.description
+   end
+  end
+
 end
